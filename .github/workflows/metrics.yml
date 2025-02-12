@@ -12,6 +12,12 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Check GitHub Token Permissions
+        run: |
+            echo "Checking token permissions..."
+            curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+                 -H "Accept: application/vnd.github.v3+json" \
+                 https://api.github.com/rate_limit
       - uses: lowlighter/metrics@latest
         with:
           # Your GitHub token
